@@ -1,0 +1,218 @@
+#sideSiteNavBox {
+	float: left;
+	margin-left: 0;
+	margin-right: 0;
+	width: 160px;
+}
+.psesd-disable-click {
+	cursor: default;
+}
+.psesd-no-overflow  .ms-noWrap{
+	white-space: normal;
+}
+
+.ms-qcb-item {
+	float: left;
+}
+
+.cbs-Item, .cbs-diagnostic-Container {
+	padding-bottom: 5px;
+}
+
+.psesd-mypsesd-site-nav {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid rgba(0, 181, 204, .8);
+}
+
+.psesd-mypsesd-sites-nav {
+	display: none;
+}
+
+.psesd-mypsesd-sites-nav li,
+.psesd-bookmarks-list li {
+	margin: 2px 0;
+}
+
+.psesd-bookmarks-list li {
+	display: none;
+}
+
+.psesd-bookmarks-list li.psesd-bookmarks-bookmark,
+.psesd-bookmarks-list li.psesd-bookmarks-active,
+.psesd-bookmarks-list.psesd-bookmarks-all li,
+.psesd-bookmarks-list .psesd-bookmarks-more {
+	display: block;
+}
+
+.psesd-mypsesd-sites-nav li div,
+.psesd-bookmarks-list li div {
+	padding: 0;
+}
+
+.psesd-mypsesd-sites-nav li .link-item a,
+.psesd-bookmarks-list li > a {
+	display: block;
+	padding: 5px 10px;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.psesd-bookmarks-list li > a,
+.psesd-bookmarks-list li > a:link,
+.psesd-bookmarks-list li > a:hover,
+.psesd-bookmarks-list li > a:active,
+.psesd-bookmarks-list li > a:visited
+ {
+	color: #fff;
+	background-color: rgba(100, 0, 204, 0.7);
+}
+.psesd-bookmarks-list li a:hover {
+	background-color: rgba(100, 0, 204, 1);
+}
+
+.psesd-bookmarks-item a.active,
+.psesd-bookmarks-item a.active:link,
+.psesd-bookmarks-item a.active:hover,
+.psesd-bookmarks-item a.active:active,
+.psesd-bookmarks-item a.active:visited {
+	border-right: 10px solid rgba(100, 0, 204, 1);
+}
+
+
+.psesd-bookmarks-more {
+	text-align: center;
+}
+
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a,
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a:link,
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a:hover,
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a:active,
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a:visited
+{
+	text-align: center;
+	background-color: rgba(60, 60, 60, 0.7);
+	color: #fff;
+}
+
+.psesd-bookmarks-list li.psesd-bookmarks-manage-button a:hover {
+	background-color: rgba(60, 60, 60, 1);
+}
+
+.psesd-mypsesd-sites-nav li .link-item a,
+.psesd-mypsesd-sites-nav li .link-item a:link,
+.psesd-mypsesd-sites-nav li .link-item a:hover,
+.psesd-mypsesd-sites-nav li .link-item a:active,
+.psesd-mypsesd-sites-nav li .link-item a:visited
+{
+	color: #fff;
+	background-color: rgba(0, 181, 204, 0.7);
+}
+.psesd-mypsesd-sites-nav li .link-item a:hover {
+	background-color: rgba(0, 181, 204, 1);
+}
+.psesd-mypsesd-sites-nav li .link-item a.active,
+.psesd-mypsesd-sites-nav li .link-item a.active:link,
+.psesd-mypsesd-sites-nav li .link-item a.active:hover,
+.psesd-mypsesd-sites-nav li .link-item a.active:active,
+.psesd-mypsesd-sites-nav li .link-item a.active:visited
+{
+	border-right: 10px solid rgba(0, 181, 204, 1);
+}
+
+.psesd-bookmark-indicator {
+	display: none;
+	float: right;
+}
+
+.psesd-bookmarks-manage .psesd-bookmarks-item a,
+.psesd-bookmarks-manage .psesd-bookmarks-item a:link,
+.psesd-bookmarks-manage .psesd-bookmarks-item a:hover,
+.psesd-bookmarks-manage .psesd-bookmarks-item a:active,
+.psesd-bookmarks-manage .psesd-bookmarks-item a:visited {
+	cursor: default;
+	background-color: rgba(60, 60, 60, .4);
+}
+
+.psesd-bookmarks-all .psesd-bookmarks-bookmark .psesd-bookmark-indicator {
+	display: inline;
+}
+
+
+
+.psesd-agency-apps {
+	border-right: 1px solid #fff;
+}
+
+.psesd-apps-dropdown {
+	position: absolute;
+	display: block;
+	background-color: rgba(255,255,255,.3);
+	padding: 1px;
+}
+.psesd-apps-dropdown div {
+	padding: 0;
+	margin: 0;
+	background-color: #fff;
+}
+.psesd-apps-dropdown a,
+.psesd-apps-dropdown a:link,
+.psesd-apps-dropdown a:hover,
+.psesd-apps-dropdown a:active,
+.psesd-apps-dropdown a:visited {
+	padding: 5px 10px;
+	text-decoration: none;
+	font-size: 1.1em;
+	display: block;
+	margin-bottom: 1px;
+	background-color: rgba(0,0,0,.5);
+	color: #fff;
+}
+.psesd-apps-dropdown a:hover {
+	background-color: rgba(0,0,0,.8);
+	color: #fff;
+}
+
+.psesd-agency-apps-list {
+	display: none;
+}
+
+.psesd-mypsesd-agency-apps-button {
+
+}
+
+.psesd-mypsesd-agency-apps-dropdown {
+	display: none;
+}
+
+.psesd-helpful-links thead {
+	display: none;
+}
+
+.psesd-button,
+.psesd-button:active,
+.psesd-button:link,
+.psesd-button:visited,
+.psesd-button:hover {
+	border: 1px solid rgba(200, 200, 200, .8);
+	border-radius: 2px;
+	background-color: rgb(230, 230, 230);
+	padding: 3px 8px;
+	font-size: 15px;
+	text-decoration: none;
+
+}
+
+.psesd-button:hover {
+	background-color: rgba(230, 230, 230, .8);
+}
+
+
+.psesd-button.psesd-button-sm {
+	font-size: 13px;
+}
+
+#layoutsTable {
+	table-layout: fixed;
+	width: 100%;
+}

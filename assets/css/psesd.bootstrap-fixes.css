@@ -1,0 +1,76 @@
+#contentBox {
+    min-width: 0;
+}
+
+.ms-dlgContent {
+    line-height: 1.1;
+}
+
+#s4-ribbonrow {
+    line-height: 1.2;
+}
+
+.ms-core-menu-link:hover,
+.ms-core-menu-link:focus,
+.ms-core-menu-link:active,
+#s4-ribbonrow a:hover,
+#s4-ribbonrow a:focus,
+#s4-ribbonrow a:active {
+    text-decoration: none;
+}
+
+#pageStatusBar,
+.ms-cui-tooltip {
+    line-height: 1.1;
+    font-size: 8pt;
+}
+
+.ms-cui-modalDiv-ie,
+.ms-cui-glass-ie {
+    background-color: transparent;
+}
+
+#s4-ribbonrow *,
+#s4-ribbonrow *:before,
+#s4-ribbonrow *:after,
+#s4-titlerow,
+#s4-titlerow *:before,
+#s4-titlerow *:after,
+#ms-help *,
+*[class*='ms-core-menu'],
+*[class*='ms-dlg'],
+*[class*='ms-dlg']:before,
+*[class*='ms-dlg']:after,
+.ms-dlgFrameContainer > div,
+.ms-dlgFrameContainer > div:before,
+.ms-dlgFrameContainer > div:after,
+.ms-dlgFrameContainer > div > div,
+.ms-dlgFrameContainer > div > div:before,
+.ms-dlgFrameContainer > div > div:after,
+.ms-MenuUIPopupBody,
+.ms-MenuUIPopupBody:before,
+.ms-MenuUIPopupBody:after,
+.ms-MenuUIPopupBody *,
+.ms-MenuUIPopupBody *:before,
+.ms-MenuUIPopupBody *:after,
+.ms-ToolPaneOuter,
+.ms-ToolPaneOuter:before,
+.ms-ToolPaneOuter:after,
+.ms-ToolPaneOuter *,
+.ms-ToolPaneOuter *:before,
+.ms-ToolPaneOuter *:after,
+*[class*='ms-cui'],
+*[class*='ms-cui']:before,
+*[class*='ms-cui']:after,
+*[class*='ms-cui'] *,
+*[class*='ms-cui'] *:before,
+*[class*='ms-cui'] *:after,
+*[class*='ms-dlg'] *,
+*[class*='ms-dlg'] *:before,
+*[class*='ms-dlg'] *:after,
+*[class*='ms-webpart'] * {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
