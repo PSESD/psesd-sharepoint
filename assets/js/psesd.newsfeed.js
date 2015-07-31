@@ -1,14 +1,13 @@
 function PsesdNewsfeed($element, settings) {
 	var self = this;
 	this.$element = $element;
-
+	
 	this.settings = jQuery.extend(true, {}, this.defaultSettings, settings);
 	this.elements = {};
 	this.elements.$canvas = $("<div />", {'class': 'psesd-newsfeed'}).appendTo(this.$element);
 	this.elements.$title = $("<h2 />", {'class': 'psesd-newsfeed-title ms-webpart-titleText'}).html(this.settings.title).appendTo(this.elements.$canvas);
 	if (this.settings.manageUrl) {
 		this.checkManagePermissions(function() {
-
 			self.elements.$manageUrl = $("<a />", {'href': self.settings.manageUrl, 'class': 'psesd-button psesd-button-sm pull-right'}).html("Manage").prependTo(self.elements.$title);
 		});
 	}
@@ -25,7 +24,6 @@ function PsesdNewsfeed($element, settings) {
 	}
 	this.initLoading();
 
-
 	sharepointLoadedDeferred.done(function() {
 		self.dataService = new SPScript.RestDao('');
 		self.triggerResourceChangeTimeout = null;
@@ -41,7 +39,8 @@ PsesdNewsfeed.prototype.defaultSettings = {
 	'title': 'Announcements',
 	'loadingCount': 15,
 	'subsite': false,
-	'manageUrl': false
+	'manageUrl': false,
+	'primaryNewsTitle': 'Agency News'
 };
 
 PsesdNewsfeed.prototype.init = function() {
@@ -49,6 +48,9 @@ PsesdNewsfeed.prototype.init = function() {
 	this.elements.$loading.hide();
 	this.elements.$results.show();
 }
+
+
+
 PsesdNewsfeed.prototype.getCurrentUser = function() {
 	if (this._currentUser === undefined) {
 		var context = new SP.ClientContext.get_current();
@@ -78,7 +80,7 @@ PsesdNewsfeed.prototype.initLoading = function() {
 	for (i = 0; i < this.settings.loadingCount; i++) {
 		var animationDelay = Math.random();
 		var item = {'SiteTitle': '<div class="psesd-newsfeed-dummy-text" style="width: '+ Math.floor((Math.random() * 50) + 70) +'px;; animation-delay: '+animationDelay+'s;"></div>', 'DatePlace': '<div class="psesd-newsfeed-dummy-text" style="width: 100px; animation-delay: '+animationDelay+'s;"></div>', 'Title': '<div class="psesd-newsfeed-dummy-text" style="width: '+ Math.floor((Math.random() * 200) + 150) +'px; animation-delay: '+animationDelay+'s;"></div>'};
-		item.$element = $("<li />").appendTo(this.elements.$loadingResults);
+		item.$element = $("<li />").addClass('clearfix').appendTo(this.elements.$loadingResults);
 		item.elements = {};
 		item.elements.$sticky = $("<div />", {'class': 'psesd-timeline-item-sticky psesd-timeline-item-dark'}).appendTo(item.$element);
 		item.elements.$site = $("<a />", {'href': '#'}).html(item.SiteTitle).addClass('psesd-disable-click psesd-timeline-item-dark psesd-timeline-item-site').appendTo(item.$element);
@@ -112,27 +114,66 @@ PsesdNewsfeed.prototype.update = function() {
 }
 
 PsesdNewsfeed.prototype.renderList = function($list, resource, isSticky) {
+	var self = this;
+	var context = new SP.ClientContext.get_current();
+	var web = context.get_web();
 	jQuery.each(resource.items, function(index, item) {
 		if (!item.$element) {
-			item.$element = $("<li />");
+			item.$element = $("<li />").addClass('clearfix');
+			item.isPrimarySite = false;
+			if (item.SiteTitle === _spPageContextInfo.webTitle) {
+				item.SiteTitle = self.settings.primaryNewsTitle;
+				item.isPrimarySite = true;
+			}
+			mypsesdSitesCallbacks.add(function(sites) {
+				if (!item.isPrimarySite && item.SPWebUrl.substr(0, mypsesdSharepointUrl.length) !== mypsesdSharepointUrl) {
+					item.$element.addClass('psesd-area-Teamsite');
+					return;
+				}
+				jQuery.each(sites, function(siteIndex, site) {
+					if (site.url !== item.SPWebUrl) {
+						return true;
+					}
+					// paint the element
+					item.$element.addClass('psesd-area-' + site.area);
+					return false;
+				});
+			});
 			item.elements = {};
 			item.elements.$sticky = $("<div />", {'class': 'psesd-timeline-item-sticky psesd-timeline-item-dark'}).appendTo(item.$element);
 			if (isSticky) {
 				item.elements.$sticky.html("<span class='fa fa-exclamation'></span>");
 			}
 			item.elements.$site = $("<a />", {'href': item.SPWebUrl}).html(item.SiteTitle).addClass('psesd-timeline-item-dark psesd-timeline-item-site').appendTo(item.$element);
-			item.elements.$title = $("<a />", {'href': item.OriginalPath}).html(item.Title).addClass('psesd-timeline-item-light psesd-timeline-item-title').appendTo(item.$element);
+			item.elements.$title = $("<a />", {'href': item.OriginalPath}).html(item.Title + ' ').addClass('psesd-timeline-item-light psesd-timeline-item-title').appendTo(item.$element);
+			item.elements.$content = $("<div />", {}).html(item.BodyOWSMTXT).addClass('psesd-timeline-item-content').hide().appendTo(item.$element);
 			if (item.AnnouncementUrl) {
-				item.elements.$title.attr('href', item.AnnouncementUrl);
+				item.elements.$title.attr('href', item.AnnouncementUrl).attr('target', '_blank');
+				item.elements.$title.append($("<i />", {'class': 'fa fa-external-link'}));
+			} else {
+				if (!item.BodyOWSMTXT || item.BodyOWSMTXT === '') {
+					item.elements.$title.click(function() {
+						return false;
+					}).addClass('psesd-disable-click');
+				} else {
+					item.elements.$title.click(function() {
+						item.elements.$content.toggle();
+						return false;
+					});
+				}
 			}
 			var date = new Date(item.Created);
 			var dateOptions = {
 			    year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: true
 			};
-			item.elements.$content = $("<div />", {'title': 'Date Posted'}).html(date.toLocaleTimeString("en-US", dateOptions)).addClass('psesd-timeline-item-date').prependTo(item.elements.$title);
-			//item.elements.$content = $("<div />", {}).html(item.BodyOWSMTXT).addClass('psesd-timeline-item-content').appendTo(item.$element);
+			item.elements.$datePosted = $("<div />", {'title': 'Date Posted'}).html(date.toLocaleTimeString("en-US", dateOptions)).addClass('psesd-timeline-item-date').prependTo(item.elements.$title);
 		}
 		item.$element.appendTo($list);
+		var elementHeight = parseInt(this.$element.innerHeight(), 10);
+		var titleHeight = parseInt(item.elements.$title.outerHeight(), 10);
+		if (elementHeight > titleHeight) {
+			item.elements.$title.height(elementHeight-10);
+		}
 	});
 }
 
@@ -164,7 +205,7 @@ PsesdNewsfeed.prototype.loadAnnouncements = function(isSticky, rowOffset) {
 	var query = 'ContentTypeId:0x0104* AND PostDate <= today AND NOT (Expires < today)'; // AND PostDateOWSDATE <= today
 	if (this.settings.subsite) {
 		var clientContext = SP.ClientContext.get_current();
-		query = 'path:https://pugetsoundesd.sharepoint.com' + clientContext.get_url() + '/* ' + query;
+		query = 'path:' + psesdSharepointUrl + clientContext.get_url() + '/* ' + query;
 	}
 	var params = {};
 	

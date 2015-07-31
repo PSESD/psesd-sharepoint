@@ -1,0 +1,115 @@
+.psesd-documents,
+.psesd-documents * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+.ms-rtefield .psesd-documents {
+	content: 'Documents Block';
+	display: block;
+	min-height: 500px;
+	background-color: #e0e0e0;
+	color: #000;
+}
+.psesd-documents-site {
+    margin-bottom: 5px;
+}
+.psesd-documents-site h2 {
+    color: #fff;
+    margin: 0;
+    padding: 5px;
+}
+.psesd-documents-site a,
+.psesd-documents-site a:link,
+.psesd-documents-site a:hover,
+.psesd-documents-site a:active,
+.psesd-documents-site a:visited {
+    color: #fff;
+}
+
+.psesd-documents .grid-item { 
+	width: 350px; 
+	padding-right: 5px;
+}
+
+.psesd-documents-site ul {
+    padding: 5px;
+    margin: 0;
+}
+
+.psesd-documents-site li {
+    list-style: none;
+}
+
+.psesd-documents-site li a,
+.psesd-documents-site li a:link,
+.psesd-documents-site li a:hover,
+.psesd-documents-site li a:active,
+.psesd-documents-site li a:visited {
+    color: #5a5a5a;
+    display: block;
+    padding: 2px;
+}
+ .psesd-documents-site li:nth-child(odd) {
+     background-color: rgba(255,255,255,.25);
+ }
+
+/*
+Primary / Default
+*/
+.psesd-documents-site {
+	background-color: rgba(0, 181, 204, .8);
+	color: #fff;
+}
+
+.psesd-documents-site ul {
+	background-color: rgba(255, 255, 255, .7);
+	color: #000;
+}
+
+/*
+	Technology
+*/
+.psesd-documents-site.psesd-area-Technology {
+	background-color: rgba(225, 43, 66, .8);
+	color: #fff;
+}
+
+
+/*
+	Learning Teaching & Family Support
+*/
+.psesd-documents-site.psesd-area-Learning-and-Teaching {
+	background-color: rgba(94, 175, 89, .8);
+	color: #fff;
+}
+
+
+/*
+	Equity and Inclusion
+*/
+.psesd-documents-site.psesd-area-Equity {
+	background-color: rgba(244, 145, 43, .8);
+	color: #fff;
+}
+
+
+
+/*
+	Highlight/Special
+*/
+.psesd-documents-site.psesd-area-Special {
+	background-color: rgba(223, 218, 67, .8);
+	color: #000;
+}
+
+
+/*
+	Teamsite
+*/
+.psesd-documents-site.psesd-area-Teamsite {
+	background-color: rgba(100, 0, 204, 0.8);
+	color: #fff;
+}

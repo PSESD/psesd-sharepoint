@@ -1,3 +1,8 @@
+jQuery.fn.reverse = [].reverse;
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 var waitForFinalEvent = (function () {
   var timers = {};
   return function (callback, ms, uniqueId) {
@@ -23,7 +28,7 @@ function isLocalStorageSupported() {
 }
 
 // Extending Array prototype with new function,
-// if that function is already defined in "Array.prototype", 
+// if that function is already defined in "Array.prototype",
 // then "Object.defineProperty" will throw an exception
 Object.defineProperty(Array.prototype, "jomRemoveElement", {
     // Specify "enumerable" as "false" to prevent function enumeration
@@ -49,8 +54,8 @@ Object.defineProperty(Array.prototype, "jomRemoveElement", {
                 // Increment count of removed items
                 removeCounter++;
 
-                // Decrement index to iterate current position 
-                // one more time, because we just removed item 
+                // Decrement index to iterate current position
+                // one more time, because we just removed item
                 // that occupies it, and next item took it place
                 index--;
             }

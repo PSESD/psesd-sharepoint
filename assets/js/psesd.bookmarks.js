@@ -26,6 +26,8 @@ PsesdBookmarks.prototype.defaultSettings = {
 		'164835818', // pugetsoundesd.sharepoint.com root
 		'336706119', // departments container
 		'289763762', // projects container
+		'45740822', // point publishing (video) site
+		'45740823', // community site
 		'0'
 	]
 };
@@ -40,12 +42,14 @@ PsesdBookmarks.prototype.render = function() {
 	if (this.bookmarks.length === 0) {
 		this.fillSiteSample();
 	}
+	// alert(JSON.stringify(this.bookmarks));
 	this.elements.$list.html('');
 	var hasHiddenBookmarks = false;
 	var $activeItem = false;
 	var activeItemString = false;
 	jQuery.each(this.sites, function(siteId, site) {
 		var $element = $("<li />").addClass('psesd-bookmarks-item').appendTo(self.elements.$list);
+		$element.attr('data-site-id', siteId);
 		if (jQuery.inArray(siteId, self.bookmarks) > -1) {
 			$element.addClass('psesd-bookmarks-bookmark');
 		} else {
@@ -92,15 +96,6 @@ PsesdBookmarks.prototype.render = function() {
 	if (hasHiddenBookmarks) {
 		var $manageElement = $("<li />", {'class': 'psesd-bookmarks-manage-button'}).appendTo(self.elements.$list);
 		var $manageLink = $("<a />", {'href': '#', 'title': 'Manage'}).html('Manage Favorites').appendTo($manageElement);
-		$manageLink.click(function() {
-			self.elements.$list.toggleClass('psesd-bookmarks-manage');
-			if (self.elements.$list.hasClass('psesd-bookmarks-manage')) {
-				$manageLink.html('Save');
-			} else {
-				$manageLink.html('Manage Favorites');
-				self.saveBookmarks();
-			}
-		});
 
 		var $moreElement = $("<li />", {'class': 'psesd-bookmarks-more'}).appendTo(self.elements.$list);
 		var $moreLink = $("<a />", {'href': '#', 'title': 'More...'}).appendTo($moreElement);
@@ -111,6 +106,18 @@ PsesdBookmarks.prototype.render = function() {
 				$moreChevron.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 			} else {
 				$moreChevron.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+			}
+		});
+
+		$manageLink.click(function() {
+			self.elements.$list.toggleClass('psesd-bookmarks-manage');
+			if (self.elements.$list.hasClass('psesd-bookmarks-manage')) {
+				$manageLink.html('Save');
+				$moreElement.hide();
+			} else {
+				$manageLink.html('Manage Favorites');
+				self.saveBookmarks();
+				$moreElement.show();
 			}
 		});
 	}
@@ -166,7 +173,7 @@ PsesdBookmarks.prototype.saveLocalData = function() {
 
 PsesdBookmarks.prototype.deleteBookmarkItem = function(bookmark) {
 	var self = this;
-	var userId = _spPageContextInfo.userId; 
+	var userId = _spPageContextInfo.userId;
 	this.bookmarksList.getItems('$filter=AuthorId eq ' + userId +' and Site eq '+bookmark+'').then(function(bookmarkItems) {
 		jQuery.each(bookmarkItems, function(index, bookmarkItem) {
 //			console.log(['delete', bookmarkItem]);
@@ -209,7 +216,7 @@ PsesdBookmarks.prototype.initSites = function() {
 	// fetch sites
 	sharepointLoadedDeferred.done(function() {
 		var teamSites = {};
-		var query = '(path:"https://pugetsoundesd.sharepoint.com" contentclass:"STS_Site" contentclass:"STS_Web" (WebTemplate <> "GROUP" AND WebTemplate <> "APP")) NOT (path:"https://pugetsoundesd.sharepoint.com/my")';
+		var query = '(path:"'+ psesdSharepointUrl +'" contentclass:"STS_Site" contentclass:"STS_Web" (WebTemplate <> "GROUP" AND WebTemplate <> "APP")) NOT (path:"'+ mypsesdSharepointUrl +'")';
 		var params = {};
 		params.rowlimit = 200;
 		params.trimduplicates = 'false';
@@ -256,7 +263,7 @@ PsesdBookmarks.prototype.loadBookmarks = function(callback) {
 
 	// fetch bookmarks
 	return sharepointLoadedDeferred.done(function() {
-		var userId = _spPageContextInfo.userId; 
+		var userId = _spPageContextInfo.userId;
 		self.bookmarksList.getItems('$filter=AuthorId eq ' + userId).then(function(items) {
 			var bookmarks = [];
 			jQuery.each(items, function(index, item) {
