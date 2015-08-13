@@ -113,10 +113,18 @@ a.psesd-timeline-item-title {
 
 .psesd-timeline-item-content {
 	margin: 1px 0;
-	padding: 5px;
+	padding: 0;
 	color: #000;
 	display: block;
+    position: relative;;
 	background-color: rgba(255,255,255,.7);
+}
+.psesd-timeline-item-content-area {
+    padding: 5px;
+}
+
+li.collapsed .psesd-timeline-item-content {
+    display: none;
 }
 
 .psesd-timeline-nosite .psesd-newsfeed-results-list > li {
@@ -127,6 +135,28 @@ a.psesd-timeline-item-title {
 	display: none;
 }
 
+.psesd-timeline-item-expandable {
+    opacity: 0;
+}
+
+li.collapsed .psesd-timeline-item-expandable {
+    opacity: .4;
+}
+
+li.collapsed.hover .psesd-timeline-item-expandable {
+    opacity: .9;
+}
+
+.psesd-timeline-item-expandable {
+	display: inline-block;
+	float: right;
+	background-color: rgba(255,255,255,.4);
+	color: #000;
+	padding: 5px;
+	font-size: .8em;
+    margin-right: 2px;
+	line-height: 1em;
+}
 
 .psesd-timeline-item-date {
 	display: inline-block;

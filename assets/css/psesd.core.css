@@ -48,7 +48,8 @@
 }
 
 .psesd-mypsesd-sites-nav li,
-.psesd-bookmarks-list li {
+.psesd-bookmarks-list li,
+.psesd-site-nav li {
 	margin: 2px 0;
 }
 
@@ -64,17 +65,63 @@
 }
 
 .psesd-mypsesd-sites-nav li div,
-.psesd-bookmarks-list li div {
+.psesd-bookmarks-list li div,
+.psesd-site-nav li div {
 	padding: 0;
 }
 
 .psesd-mypsesd-sites-nav li .link-item a,
-.psesd-bookmarks-list li > a {
+.psesd-bookmarks-list li > a,
+.psesd-site-nav li > a,
+.psesd-site-nav .ms-core-listMenu-verticalBox > .ms-core-listMenu-item,
+.psesd-site-nav .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item {
 	display: block;
 	padding: 5px 10px;
 	text-decoration: none;
 	font-size: 14px;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.05);
 }
+
+.psesd-mypsesd-sites-nav li .link-item a:active,
+.psesd-bookmarks-list li > a:active,
+.psesd-site-nav li > a:active,
+.psesd-site-nav .ms-core-listMenu-verticalBox > .ms-core-listMenu-item:active,
+.psesd-site-nav .ms-core-listMenu-verticalBox li.static > .ms-core-listMenu-item:active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+.psesd-site-nav .ms-core-sideNavBox-removeLeftMargin {
+    margin-left: 0;
+}
+
+.psesd-site-nav li > a,
+.psesd-site-nav li > a:link,
+.psesd-site-nav li > a:hover,
+.psesd-site-nav li > a:active,
+.psesd-site-nav li > a:visited
+{
+	color: #474747;
+	background-color: rgba(230, 230, 230, 0.7);
+}
+.psesd-site-nav li > a:hover,
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item:hover {
+	background-color: rgba(230, 230, 230, 1);
+}
+.psesd-site-nav .ms-core-listMenu-verticalBox li.static > ul.static > li.static > .ms-core-listMenu-item {
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item,
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item:link,
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item:hover,
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item:active,
+.psesd-site-nav li.selected > a.selected.ms-core-listMenu-selected.ms-core-listMenu-item:visited
+{
+	border-right: 10px solid rgba(211, 211, 211, 1);
+    font-weight: normal;
+}
+
 
 .psesd-bookmarks-list li > a,
 .psesd-bookmarks-list li > a:link,
@@ -255,9 +302,9 @@
 	font-size: 14px;
 	background-color: #0072c6;
 	color: #fff;
-	padding: 5px;
-	margin-left: -20px;
-	padding-left: 20px;
+	padding: 10px;
+	/*margin-left: -20px;
+	padding-left: 20px;*/
 	text-decoration: none;
 }
 .psesd-breadcrumb .breadcrumbNode:hover {
@@ -365,4 +412,3 @@ a.button:active {
 a.button:hover {
 	background-color: rgba(0, 114, 198, 0.8);
 }
-
